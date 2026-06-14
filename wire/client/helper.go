@@ -2,8 +2,8 @@ package client
 
 import (
 	"fmt"
-	"savage-wire/log"
-	"savage-wire/wire"
+	"github.com/smallfz/savage-wire/log"
+	"github.com/smallfz/savage-wire/wire"
 	"strings"
 )
 

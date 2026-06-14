@@ -3,7 +3,7 @@ package driver
 import (
 	"database/sql"
 	"database/sql/driver"
-	"savage-wire/wire/client"
+	"github.com/smallfz/savage-wire/wire/client"
 )
 
 type drv struct {

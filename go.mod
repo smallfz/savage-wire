@@ -1,4 +1,4 @@
-module savage-wire
+module github.com/smallfz/savage-wire
 
 go 1.25.0
 

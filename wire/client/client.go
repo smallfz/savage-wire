@@ -2,10 +2,10 @@ package client
 
 import (
 	"crypto/tls"
+	"github.com/smallfz/savage-wire/wire"
 	"golang.org/x/net/websocket"
 	"net/url"
 	"path"
-	"savage-wire/wire"
 	"strings"
 )
 

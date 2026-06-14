@@ -6,8 +6,8 @@ import (
 	"database/sql/driver"
 	"encoding/json"
 	"fmt"
-	"savage-wire/log"
-	"savage-wire/wire"
+	"github.com/smallfz/savage-wire/log"
+	"github.com/smallfz/savage-wire/wire"
 )
 
 type Stmt interface {

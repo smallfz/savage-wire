@@ -3,9 +3,9 @@ package client
 import (
 	"database/sql/driver"
 	"fmt"
+	"github.com/smallfz/savage-wire/log"
+	"github.com/smallfz/savage-wire/wire"
 	"io"
-	"savage-wire/log"
-	"savage-wire/wire"
 )
 
 type Rows interface {

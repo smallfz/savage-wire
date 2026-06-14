@@ -2,7 +2,7 @@ package client
 
 import (
 	"fmt"
-	"savage-wire/wire"
+	"github.com/smallfz/savage-wire/wire"
 )
 
 type Tx struct {
