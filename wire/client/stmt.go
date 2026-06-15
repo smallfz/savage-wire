@@ -206,14 +206,13 @@ func (s *stmt) query(x context.Context, args []any) (*rows, error) {
 
 	go func() {
 		defer close(ch)
-		closed := false
 		for {
 			p, err := readNextTagPacket(s.rw, "fetch")
 			if err != nil {
 				chErr <- err
 				return
 			}
-			log.Debug(fmt.Sprintf("fetch loop: tag=%s", p.Tag))
+			// log.Debug(fmt.Sprintf("fetch loop: tag=%s", p.Tag))
 			switch p.Tag {
 			case "fetch:end":
 				return
@@ -231,19 +230,17 @@ func (s *stmt) query(x context.Context, args []any) (*rows, error) {
 					"data rows received. %d rows.",
 					len(drows.Rows),
 				))
-				if len(drows.Rows) > 0 && !closed {
+				if len(drows.Rows) > 0 {
 					for _, vals := range drows.Rows {
-						log.Debug(fmt.Sprintf(
-							"deliver row: %d values.",
-							len(vals),
-						))
+						// log.Info(fmt.Sprintf(
+						// 	"deliver row: %d values.",
+						// 	len(vals),
+						// ))
 						select {
 						case ch <- vals:
 						case <-chClose:
-							closed = true
-						}
-						if closed {
-							break
+							return
+						case <-x.Done():
 						}
 					}
 				}

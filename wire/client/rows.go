@@ -22,11 +22,15 @@ type rows struct {
 }
 
 func (rs *rows) Close() error {
+	rs.closeSelf()
+	return nil
+}
+
+func (rs *rows) closeSelf() {
 	select {
 	case rs.chClose <- 1:
 	default:
 	}
-	return nil
 }
 
 func (rs *rows) Columns() []string {
@@ -65,6 +69,7 @@ func (rs *rows) NextRow(dest []any) error {
 		return io.EOF
 	}
 	if len(dest) > len(vals) {
+		go rs.closeSelf()
 		return fmt.Errorf(
 			"provided %d slots for only %d values.",
 			len(dest),

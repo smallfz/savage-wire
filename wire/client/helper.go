@@ -17,7 +17,11 @@ func readNextTagPacket(r wire.Reader, tagPrefix string) (*wire.Packet, error) {
 		if strings.Index(p.Tag, prefix) == 0 {
 			return p, nil
 		} else {
-			log.Debug(fmt.Sprintf("tag %s: discard", p.Tag))
+			log.Debug(fmt.Sprintf(
+				"tag %s: discard. (expects prefix %s)",
+				p.Tag,
+				tagPrefix,
+			))
 		}
 	}
 }
