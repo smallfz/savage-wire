@@ -10,6 +10,7 @@ import (
 
 type Rows interface {
 	Close() error
+	ColumnCount() int
 	Columns() []string
 	NextRow([]any) error
 }
@@ -31,6 +32,10 @@ func (rs *rows) closeSelf() {
 	case rs.chClose <- 1:
 	default:
 	}
+}
+
+func (rs *rows) ColumnCount() int {
+	return len(rs.portal.Columns)
 }
 
 func (rs *rows) Columns() []string {
