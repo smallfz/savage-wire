@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"encoding/binary"
 	"fmt"
-	"github.com/ncruces/go-sqlite3"
 	"io"
 )
 
@@ -51,8 +50,8 @@ type Result struct {
 }
 
 type Column struct {
-	Name string           `json:"column"`
-	Type sqlite3.Datatype `json:"type"`
+	Name string   `json:"column"`
+	Type Datatype `json:"type"`
 }
 
 type Portal struct {
