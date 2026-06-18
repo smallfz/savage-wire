@@ -11,6 +11,7 @@ import (
 )
 
 type Conn interface {
+	AuthInfo() *wire.AuthResult
 	PrepareStmt(context.Context, string) (Stmt, error)
 	ExecWithArgs(context.Context, string, []any) (Result, error)
 	BeginTx() (*Tx, error)
@@ -61,6 +62,10 @@ func (c *conn) handshake(req *wire.ReqAuth) error {
 	default:
 		return fmt.Errorf("unexpected reply: tag=%s", p.Tag)
 	}
+}
+
+func (c *conn) AuthInfo() *wire.AuthResult {
+	return c.authResult
 }
 
 func (c *conn) Prepare(q string) (driver.Stmt, error) {
